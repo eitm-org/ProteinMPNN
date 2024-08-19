@@ -4,3 +4,4 @@ torchaudio
 torch
 torchvision 
 wheel
+pip
