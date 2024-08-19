@@ -4,4 +4,5 @@ torchaudio
 torch
 torchvision 
 wheel
-pip
+setuptools
+yaml
