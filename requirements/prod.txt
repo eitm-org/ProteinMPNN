@@ -1,0 +1,5 @@
+apiwrapper
+-i https://download.pytorch.org/whl/cu124
+torchaudio
+torch
+torchvision 
