@@ -3,3 +3,4 @@ apiwrapper
 torchaudio
 torch
 torchvision 
+wheel
