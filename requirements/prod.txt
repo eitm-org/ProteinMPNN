@@ -5,4 +5,4 @@ torch
 torchvision 
 wheel
 setuptools
-yaml
+pyaml
