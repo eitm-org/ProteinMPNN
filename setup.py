@@ -36,8 +36,16 @@ parsed_test_requirements = parse_requirements(
 requirements = [str(ir.requirement) for ir in parsed_requirements]
 test_requirements = [str(tr.requirement) for tr in parsed_test_requirements]
 
-path_helper_scripts = util.convert_path('proteinmpnn/helper_scripts')
-path_other_tools = util.convert_path('proteinmpnn/helper_scripts/other_tools')
+import os
+
+def package_files(directory):
+    paths = []
+    for (path, directories, filenames) in os.walk(directory):
+        for filename in filenames:
+            paths.append(os.path.join('..', path, filename))
+    return paths
+
+extra_files = package_files('proteinmpnn/vanilla_model_weights') + package_files('proteinmpnn/soluble_model_weights') + package_files('proteinmpnn/ca_model_weights')
 
 setup(
     name='proteinmpnn',
@@ -49,18 +57,19 @@ setup(
     url='https://github.com/xingyaoc/proteinmpnn',
     packages=[
         'proteinmpnn',
-        # 'proteinmpnn.protein_mpnn_run',
-        # 'proteinmpnn.protein_mpnn_utils',
-        # 'proteinmpnn.helper_scripts',
-        # 'proteinmpnn.helper_scripts.other_tools',
+        'proteinmpnn.protein_mpnn_run',
+        'proteinmpnn.protein_mpnn_utils',
+        'proteinmpnn.helper_scripts',
+        'proteinmpnn.helper_scripts.other_tools',
         ],
     package_dir={
         'proteinmpnn': 'proteinmpnn',
-        # 'proteinmpnn.protein_mpnn_run': 'proteinmpnn',
-        # 'proteinmpnn.protein_mpnn_utils': 'proteinmpnn',
-        # 'proteinmpnn.helper_scripts': path_helper_scripts,
-        # 'proteinmpnn.helper_scripts.other_tools': path_other_tools,
+        'proteinmpnn.protein_mpnn_run': 'proteinmpnn',
+        'proteinmpnn.protein_mpnn_utils': 'proteinmpnn',
+        'proteinmpnn.helper_scripts': 'proteinmpnn/helper_scripts',
+        'proteinmpnn.helper_scripts.other_tools':  'proteinmpnn/helper_scripts/other_tools',
                  },
+    package_data={'': extra_files},
     include_package_data=True,
     install_requires=requirements,
     license="ISCL",
