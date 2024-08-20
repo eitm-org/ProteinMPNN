@@ -45,7 +45,7 @@ def package_files(directory):
             paths.append(os.path.join('..', path, filename))
     return paths
 
-# extra_files = package_files('proteinmpnn/vanilla_model_weights') + package_files('proteinmpnn/soluble_model_weights') + package_files('proteinmpnn/ca_model_weights')
+extra_files = package_files('proteinmpnn/vanilla_model_weights') + package_files('proteinmpnn/soluble_model_weights') + package_files('proteinmpnn/ca_model_weights')
 
 setup(
     name='proteinmpnn',
@@ -56,6 +56,7 @@ setup(
     author_email='xchen@eitm.org',
     url='https://github.com/xingyaoc/proteinmpnn',
     packages=find_packages(include=['proteinmpnn', 'proteinmpnn.*']),
+    package_data={'':extra_files},
     include_package_data=True,
     install_requires=requirements,
     license="ISCL",
