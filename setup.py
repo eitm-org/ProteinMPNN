@@ -11,6 +11,8 @@ try:
 except ImportError:
     from distutils.core import setup
 
+from setuptools import setup, find_packages
+
 
 with open('README.rst') as readme_file:
     readme = readme_file.read()
@@ -42,12 +44,10 @@ setup(
     author="Xingyao Chen",
     author_email='xchen@eitm.org',
     url='https://github.com/xingyaoc/proteinmpnn',
-    packages=[
-        'proteinmpnn',
-    ],
-    package_dir={'proteinmpnn':
-                 'proteinmpnn',
-                 },
+    packages=find_packages(),
+    # package_dir={'proteinmpnn':
+    #              'proteinmpnn',
+    #              },
     include_package_data=True,
     install_requires=requirements,
     license="ISCL",
