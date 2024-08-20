@@ -50,7 +50,6 @@ setup(
     ],
     package_dir={'proteinmpnn':
                  'proteinmpnn',
-                 'proteinmpnn.helper_scripts': 'proteinmpnn/helper_scripts'
                  },
     include_package_data=True,
     install_requires=requirements,
