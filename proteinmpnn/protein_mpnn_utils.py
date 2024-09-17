@@ -12,11 +12,27 @@ import torch.nn as nn
 import torch.nn.functional as F
 import random
 import itertools
+import SeqIO
 
 #A number of functions/classes are adopted from: https://github.com/jingraham/neurips19-graph-protein-design
 class Struct:
     def __init__(self, **entries): 
         self.__dict__.update(entries)
+
+def write_best_sequence(fasta_path, out_folder):
+    input_seqs = {}
+    for seq_record in SeqIO.parse(fasta_path, "fasta"):
+        if "design" not in seq_record.id: # Skip first sequence ("GGGGG...GGG")
+            index = seq_record.description.find("score=")
+            input_seqs[seq_record.description[index + 6: index + 12]] = seq_record
+        else: 
+            seq_id = seq_record.id
+    best_seq = input_seqs[max(input_seqs)]
+    best_seq.id = seq_id
+    fasta_file = fasta_path.split('/')[-1]
+    best_fasta_path = os.path.join(out_folder, 'best_seq', fasta_file)
+    with open(best_fasta_path, 'w') as handle:
+        SeqIO.write(best_seq, handle, 'fasta')
 
 def parse_fasta(filename,limit=-1, omit=[]):
     header = []
