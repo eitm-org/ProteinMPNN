@@ -12,7 +12,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import random
 import itertools
-import SeqIO
+from Bio import SeqIO
 
 def write_best_sequence(fasta_path, out_folder):
     input_seqs = {}
