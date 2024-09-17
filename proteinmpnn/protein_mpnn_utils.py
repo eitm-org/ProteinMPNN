@@ -12,12 +12,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import random
 import itertools
-import SeqIO
-
-#A number of functions/classes are adopted from: https://github.com/jingraham/neurips19-graph-protein-design
-class Struct:
-    def __init__(self, **entries): 
-        self.__dict__.update(entries)
+from Bio import SeqIO
 
 def write_best_sequence(fasta_path, out_folder):
     input_seqs = {}
@@ -31,9 +26,14 @@ def write_best_sequence(fasta_path, out_folder):
     best_seq.id = seq_id
     fasta_file = fasta_path.split('/')[-1]
     best_fasta_path = os.path.join(out_folder, 'best_seqs', fasta_file)
-    with open(best_fasta_path, 'w') as handle:
+    with open(best_fasta_path, 'w+') as handle:
         SeqIO.write(best_seq, handle, 'fasta')
 
+class Struct:
+    def __init__(self, **entries): 
+        self.__dict__.update(entries)
+
+#A number of functions/classes are adopted from: https://github.com/jingraham/neurips19-graph-protein-design
 def parse_fasta(filename,limit=-1, omit=[]):
     header = []
     sequence = []
