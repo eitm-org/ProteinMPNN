@@ -16,8 +16,8 @@ from Bio import SeqIO
 
 def write_best_sequence(fasta_path, out_folder):
     input_seqs = {}
-    for seq_record in SeqIO.parse(fasta_path, "fasta"):
-        if "design" not in seq_record.id: # Skip first sequence ("GGGGG...GGG")
+    for i, seq_record in enumerate(SeqIO.parse(fasta_path, "fasta")): 
+        if i!=0: # Skip first sequence ("GGGGG...GGG")
             index = seq_record.description.find("score=")
             input_seqs[seq_record.description[index + 6: index + 12]] = seq_record
         else: 
