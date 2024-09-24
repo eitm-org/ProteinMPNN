@@ -25,7 +25,10 @@ def write_best_sequence(fasta_path, out_folder):
     best_seq = input_seqs[max(input_seqs)]
     best_seq.id = seq_id
     fasta_file = fasta_path.split('/')[-1]
-    best_fasta_path = os.path.join(out_folder, 'best_seqs', fasta_file)
+    best_seqs_dir = os.path.join(out_folder, 'best_seqs')
+    if not os.path.isdir(best_seqs_dir):
+        os.makedirs(best_seqs_dir)
+    best_fasta_path = os.path.join(best_seqs_dir, fasta_file)
     with open(best_fasta_path, 'w+') as handle:
         SeqIO.write(best_seq, handle, 'fasta')
 
