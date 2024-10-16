@@ -28,7 +28,7 @@ def map_motif_sequence(motif_pdbs_dir, pdbs_dir, output_dir, verbose=False):
     """
 
     # Create output directory
-    processed_pdb_dir = os.path.join(output_dir, 'processed_pdbs')
+    processed_pdb_dir = output_dir
     assert not os.path.exists(processed_pdb_dir), 'Output processed pdbs directory existed'
     os.mkdir(processed_pdb_dir)
 
@@ -65,9 +65,7 @@ def map_motif_sequence(motif_pdbs_dir, pdbs_dir, output_dir, verbose=False):
         with open(processed_pdb_filepath, 'w') as file:
             file.write(''.join(lines))
 
-    return processed_pdb_dir
-
-def create_fixed_positions_dict(motif_pdbs_dir, processed_pdbs_dir, output_dir, verbose):
+def create_fixed_positions_dict(motif_pdbs_dir, processed_pdbs_dir, output_dir, verbose=False):
     """
     Run conditional inverse folding to obtain sequences.
 
@@ -110,4 +108,3 @@ def create_fixed_positions_dict(motif_pdbs_dir, processed_pdbs_dir, output_dir, 
         # Predict
     with open(os.path.join(output_dir, f'fixed_positions.jsonl'),  'w') as file:
         file.write(json.dumps(full_fixed_positions_dict) + '\n')
-    return os.path.join(output_dir, f'fixed_positions.jsonl')
