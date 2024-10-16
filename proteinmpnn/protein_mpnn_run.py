@@ -12,23 +12,17 @@ import copy
 import torch.nn as nn
 import torch.nn.functional as F
 import random
+from omegaconf import OmegaConf
 import os.path
 import subprocess
 import yaml
 
 from proteinmpnn.protein_mpnn_utils import loss_nll, loss_smoothed, gather_edges, gather_nodes, gather_nodes_t, cat_neighbors_nodes, _scores, _S_to_seq, tied_featurize, parse_PDB, parse_fasta
 from proteinmpnn.protein_mpnn_utils import StructureDataset, StructureDatasetPDB, ProteinMPNN
-from proteinmpnn.protein_mpnn_utils import Struct
 
 def run_protein_mpnn(config_path):
-    with open(config_path) as stream:
-        try:
-            config = yaml.safe_load(stream)
-        except yaml.YAMLError as exc:
-            print(exc)
-    args = Struct(**config['proteinmpnn'])
-    main(args)
-
+    args = OmegaConf.load(config_path)
+    main(args.proteinmpnn)
 
 def main(args):
     if args.seed:
@@ -92,6 +86,7 @@ def main(args):
             json_list = list(json_file)
         for json_str in json_list:
             fixed_positions_dict = json.loads(json_str)
+            print(fixed_positions_dict.keys())
     else:
         if print_all:
             print(40*'-')

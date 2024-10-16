@@ -1,10 +1,11 @@
-apiwrapper
-biopython
--i https://download.pytorch.org/whl/cu124
+# -i https://download.pytorch.org/whl/cu124
 torchaudio
 torch
 torchvision 
 wheel
 setuptools
+omegaconf
 pyaml
 pip
+tqdm
+biopython
