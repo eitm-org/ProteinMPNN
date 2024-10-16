@@ -65,7 +65,7 @@ def map_motif_sequence(motif_pdbs_dir, pdbs_dir, output_dir, verbose=False):
         with open(processed_pdb_filepath, 'w') as file:
             file.write(''.join(lines))
 
-def create_fixed_positions_dict(motif_pdbs_dir, processed_pdbs_dir, output_dir, verbose=False):
+def create_fixed_positions_dict(motif_pdbs_dir, processed_pdbs_dir, output_path, verbose=False):
     """
     Run conditional inverse folding to obtain sequences.
 
@@ -106,5 +106,5 @@ def create_fixed_positions_dict(motif_pdbs_dir, processed_pdbs_dir, output_dir, 
         }
         full_fixed_positions_dict = full_fixed_positions_dict | fixed_positions_dict
         # Predict
-    with open(os.path.join(output_dir, f'fixed_positions.jsonl'),  'w') as file:
+    with open(output_path,  'w') as file:
         file.write(json.dumps(full_fixed_positions_dict) + '\n')
