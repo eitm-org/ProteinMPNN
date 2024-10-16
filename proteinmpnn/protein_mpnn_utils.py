@@ -32,10 +32,6 @@ def write_best_sequence(fasta_path, out_folder):
     with open(best_fasta_path, 'w+') as handle:
         SeqIO.write(best_seq, handle, 'fasta')
 
-class Struct:
-    def __init__(self, **entries): 
-        self.__dict__.update(entries)
-
 #A number of functions/classes are adopted from: https://github.com/jingraham/neurips19-graph-protein-design
 def parse_fasta(filename,limit=-1, omit=[]):
     header = []

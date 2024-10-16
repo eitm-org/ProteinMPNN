@@ -1,19 +1,15 @@
 import argparse
-import numpy as np
 import os, time, gzip, json
 import glob
 import yaml
 
-from proteinmpnn.protein_mpnn_utils import Struct
+import numpy as np
+from omegaconf import OmegaConf
+
 
 def parse_multiple_chains(config_path):
-    with open(config_path) as stream:
-        try:
-            config = yaml.safe_load(stream)
-        except yaml.YAMLError as exc:
-            print(exc)
-    args = Struct(**config['parse_multiple_chains'])
-    main(args)
+    args = OmegaConf.load(config_path)
+    main(args.proteinmpnn.parse_multiple_chains)
 
 
 def main(args):
