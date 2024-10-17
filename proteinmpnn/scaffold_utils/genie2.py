@@ -27,11 +27,6 @@ def map_motif_sequence(motif_pdbs_dir, pdbs_dir, output_dir, verbose=False):
             information.
     """
 
-    # Create output directory
-    processed_pdb_dir = output_dir
-    assert not os.path.exists(processed_pdb_dir), 'Output processed pdbs directory existed'
-    os.mkdir(processed_pdb_dir)
-
     # Process
     for pdb_filepath in tqdm(
         glob.glob(os.path.join(pdbs_dir, '*.pdb')),
