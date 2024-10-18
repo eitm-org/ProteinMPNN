@@ -56,7 +56,7 @@ def map_motif_sequence(motif_pdbs_dir, pdbs_dir, output_dir, verbose=False):
                 lines.append(line[:17] + residue_name + line[20:])
 
         # Save
-        processed_pdb_filepath = os.path.join(processed_pdb_dir, f'{domain_name}.pdb')
+        processed_pdb_filepath = os.path.join(output_dir, f'{domain_name}.pdb')
         with open(processed_pdb_filepath, 'w') as file:
             file.write(''.join(lines))
 
