@@ -1,4 +1,5 @@
 import argparse
+from omegaconf import OmegaConf
 
 def main(args):
     import json
@@ -24,6 +25,9 @@ def main(args):
     with open(args.output_path, 'w') as f:
         f.write(json.dumps(my_dict) + '\n')
 
+def assign_fixed_chains(config_path):
+    args = OmegaConf.load(config_path)
+    main(args.proteinmpnn.assign_fixed_chains)
 
 if __name__ == "__main__":
     argparser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
