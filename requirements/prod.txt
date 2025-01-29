@@ -1,6 +1,6 @@
 # -i https://download.pytorch.org/whl/cu124
 torchaudio
-torch
+torch==2.4.0
 torchvision 
 wheel
 setuptools
