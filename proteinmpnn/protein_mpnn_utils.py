@@ -22,7 +22,7 @@ def write_best_sequence(fasta_path, out_folder):
             input_seqs[seq_record.description[index + 6: index + 12]] = seq_record
         else: 
             seq_id = seq_record.id
-    best_seq = input_seqs[max(input_seqs)]
+    best_seq = input_seqs[min(input_seqs)]
     best_seq.id = seq_id
     fasta_file = fasta_path.split('/')[-1]
     best_seqs_dir = os.path.join(out_folder, 'best_seqs')
